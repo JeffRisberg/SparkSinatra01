@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="images/favicon.ico"/>
+
+    <title>SparkSinatra01</title>
+
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Source+Code+Pro'>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.css">
+    <link rel="stylesheet" href="stylesheets/normalize.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
+    <script src="http://cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.js"></script>
+    {{#block "includes"}}{{/block}}
+    <script>
+        function navigateTo(path) {
+            document.location.href = location.pathname.replace(/\/[a-z]+$/, path)
+        }
+
+        function formatTime(time) {
+            if (time < 60) {
+                return time.toFixed(1) + " secs";
+            }
+
+            time = time.toFixed(2) / 60;
+
+            if (time < 60) {
+                return time.toFixed(1) + " mins";
+            }
+
+            time = time / 60;
+
+            if (time < 24) {
+                return time.toFixed(1) + " hrs";
+            }
+
+            time = time / 24;
+
+            return time.toFixed(1) + " days"
+        }
+
+        $(document).ready(function () {
+            var match = /\/([a-z]+)$/.exec(location.pathname);
+            $("#" + match[1] + "-link").addClass("active")
+        });
+
+    </script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img src="images/sparkSinitra01-logo.png"/>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li id="alpha-link"><a href="javascript:navigateTo('/alpha');">Alpha</a></li>
+                <li id="beta-link"><a href="javascript:navigateTo('/beta');">Beta</a></li>
+                <li id="gamma-link"><a href="javascript:navigateTo('/gamma');">Gamma</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            {{#block "content"}}{{/block}}
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
